@@ -1,5 +1,5 @@
 import {createAndSortArr, getPerformance} from './utils.js';
-import __wbg_init from '../pkg/js_vs_wasm.js';
+import __wbg_init from '../wasm/js_vs_wasm.js';
 const wasm = await __wbg_init();
 
 const quickSortContainer = document.querySelector('.quick-sort');
