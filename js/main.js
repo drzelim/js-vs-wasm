@@ -25,8 +25,6 @@ quickSortContainer.addEventListener('click', (evt) => {
         return;
     }
 
-    evt.currentTarget.classList.add('loading');
-
     const resultElem = evt.target.parentElement.querySelector('.result');
     const input = evt.target.parentElement.querySelector('input');
 
@@ -41,6 +39,5 @@ quickSortContainer.addEventListener('click', (evt) => {
     const result = Functions[evt.currentTarget.dataset.name][evt.target.dataset.lang](Number(input.value));
 
     resultElem.textContent = getFormatedResult(result);
-    evt.currentTarget.classList.remove('loading');
     
 });
