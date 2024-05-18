@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>My Rust + Webpack project!</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <div class="container">
+
+        <div data-name="quickSort" class="block quick-sort">
+            <h2>Quick sort (creating an array and sorting)</h2>
+
+            <div class="inner-container">
+                <label>
+                    <span class="title">JS</span>
+                    <input type="number" value="25000000" maxlength="50000000">
+                </label>
+                
+                <button data-lang="js">Execute</button>
+
+                <div class="result-container">
+                    <h3>Time:</h3>
+                    <span class="result">0</span>
+                </div>
+            </div>
+            <div class="inner-container">
+                <label>
+                    <span class="title">WASM</span>
+                    <input type="number" value="25000000" maxlength="500000000">
+                </label>
+                <button data-lang="wasm">Execute</button>
+                <div class="result-container">
+                    <h3>Time:</h3>
+                    <span class="result">0</span>
+                </div>
+            </div>
+        </div>
+      
+    </div>
+
+    <script type="module" src="index.js"></script>
+  </body>
+</html>
