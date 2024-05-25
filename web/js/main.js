@@ -1,8 +1,9 @@
-import {createAndSortArr, getPerformance} from './utils.js';
+import {createAndSortArr, getPerformance, useDoubleRAF} from './utils.js';
 import __wbg_init from '../wasm/js_vs_wasm.js';
 const wasm = await __wbg_init();
 
-const quickSortContainer = document.querySelector('.quick-sort');
+const container = document.querySelector('.container');
+const quickSortContainer = container.querySelector('.quick-sort');
 
 export const getFunction = (cb, ...rest) => {
     return getPerformance(() => cb(...rest));
@@ -19,25 +20,32 @@ const getFormatedResult = (value) => {
     return `${value.toFixed(5)} ms`;
 }
 
-quickSortContainer.addEventListener('click', (evt) => {
+const clickHandler = useDoubleRAF((target, block) => {
+    const resultElem = target.parentElement.querySelector('.result');
+    const input = target.parentElement.querySelector('input');
 
-    if (evt.target.tagName !== 'BUTTON') {
-        return;
-    }
+    const maxlength = input ? input.getAttribute('maxlength') : '';
 
-    const resultElem = evt.target.parentElement.querySelector('.result');
-    const input = evt.target.parentElement.querySelector('input');
-
-    const maxlength = input.getAttribute('maxlength');
-
-    if (Number(input.value) > Number(maxlength)) {
+    if (maxlength && Number(input.value) > Number(maxlength)) {
         alert('Number too high');
         input.value = maxlength;
         return;
     }
 
-    const result = Functions[evt.currentTarget.dataset.name][evt.target.dataset.lang](Number(input.value));
-
+    const result = Functions[block.dataset.name][target.dataset.lang](Number(input.value));
     resultElem.textContent = getFormatedResult(result);
+
+    block.classList.remove('loading');
+});
+
+container.addEventListener('click', function (evt) {
+    if (evt.target.tagName !== 'BUTTON') return;
+
+    const block = evt.target.closest('.block[data-name]');
+    if (!block) return;
+
     
+    block.classList.add('loading');
+
+    clickHandler(evt.target, block);
 });

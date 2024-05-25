@@ -11,7 +11,7 @@ export const calculate = (numThrows) => {
     }
     
     return num;
-}
+};
 
 export const bubbleSort = (arr) => {
     for (let i = arr.length - 1; i > 0; i--) {
@@ -23,13 +23,13 @@ export const bubbleSort = (arr) => {
         }
       }
     }
-}
+};
 
 export const createAndSortArr = (arrLength) => {
     const arr = new Array(arrLength).fill(0).map((item, index) => arrLength - index);
     arr.sort((a, b) => a - b);
     return arr[arr.length - 1];
-}
+};
 
 export const getPerformance = (cb) => {
     const start = performance.now();
@@ -37,4 +37,13 @@ export const getPerformance = (cb) => {
     const end = performance.now();
 
     return end - start;
-}
+};
+
+
+export const useDoubleRAF = (cb) => {
+    return (...args) => {
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => cb(...args))
+        });
+    };
+};
